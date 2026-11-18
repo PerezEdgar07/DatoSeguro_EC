@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de consentimientos - LOPDP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Registro de consentimientos</h1>
+    <p>Demostración de privacidad desde el diseño (LOPDP, art. 39)</p>
+  </header>
+
+  <main>
+    <!-- 1. FORMULARIO DE CONSENTIMIENTO -->
+    <section class="tarjeta">
+      <h2>1. Otorgar consentimiento</h2>
+      <p class="nota">
+        Solo pedimos un alias o nombre. No se necesita cédula ni correo para esta demostración
+        (principio de minimización).
+      </p>
+
+      <form id="formulario">
+        <label for="titular">Nombre o alias del titular</label>
+        <input type="text" id="titular" maxlength="60" required placeholder="Ej: María P.">
+
+        <fieldset>
+          <legend>Finalidades (todas desmarcadas por defecto)</legend>
+          <label class="opcion">
+            <input type="checkbox" name="finalidad" value="promociones">
+            Recibir promociones por correo
+          </label>
+          <label class="opcion">
+            <input type="checkbox" name="finalidad" value="terceros">
+            Compartir mis datos con aliados comerciales
+          </label>
+          <label class="opcion">
+            <input type="checkbox" name="finalidad" value="analitica">
+            Analizar mi uso para mejorar el servicio
+          </label>
+        </fieldset>
+
+        <p class="nota">Versión del texto de política que se muestra: <strong id="version"></strong></p>
+        <button type="submit">Guardar consentimiento</button>
+        <p id="mensaje-form" class="mensaje" role="status"></p>
+      </form>
+    </section>
+
+    <!-- 2. VERIFICAR PERMISO -->
+    <section class="tarjeta">
+      <h2>2. Verificar permiso antes de usar un dato</h2>
+      <p class="nota">
+        Antes de enviar una promoción o compartir un dato, el sistema debe comprobar
+        si existe consentimiento vigente para esa finalidad.
+      </p>
+      <div class="fila">
+        <input type="text" id="verificar-titular" placeholder="Nombre o alias">
+        <select id="verificar-finalidad"></select>
+        <button type="button" id="boton-verificar">Verificar</button>
+      </div>
+      <p id="resultado-verificacion" class="mensaje" role="status"></p>
+    </section>
+
+    <!-- 3. REGISTRO -->
+    <section class="tarjeta">
+      <h2>3. Registro de consentimientos</h2>
+      <div class="tabla-contenedor">
+        <table>
+          <thead>
+            <tr>
+              <th>Titular</th>
+              <th>Finalidad</th>
+              <th>Versión</th>
+              <th>Otorgado</th>
+              <th>Estado</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="cuerpo-tabla"></tbody>
+        </table>
+      </div>
+      <p id="vacio" class="nota">Todavía no hay consentimientos registrados.</p>
+      <button type="button" id="boton-borrar" class="secundario">Borrar todo el registro de prueba</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Los datos se guardan solo en el navegador (localStorage) con fines de demostración.
+      Un sistema real usaría una base de datos con control de acceso y cifrado.
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
